@@ -27,8 +27,19 @@ class Bank:
     def pin(self):
         return ''.join(str(randint(0, 9)) for _ in range(4))
 
+    def luhn(self, card_number):
+        odds = sum([int(x) * 2 if int(x) * 2 < 9 else int(x) * 2 - 9
+                    for x in card_number[-1::-2]])
+        evens = sum([int(x) for x in card_number[-2::-2]])
+        crc = (evens + odds) % 10
+        if crc == 0:
+            return "0"
+
+        return str(10 - crc)
+
     def account(self):
-        return "400000" + ''.join(str(randint(0, 9)) for _ in range(10))
+        card_number = "400000" + ''.join(str(randint(0, 9)) for _ in range(9))
+        return card_number + self.luhn(card_number)
 
     def create_account(self):
         pin = self.pin()
