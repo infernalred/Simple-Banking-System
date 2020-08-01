@@ -87,7 +87,7 @@ files:
         are_all_inputs_read = True
         if 'wrong' not in output.lower():
             return CheckResult.wrong(
-                'There is no \'wrong\' in your output after signing in with correct credentials')
+                'There is no \'wrong\' in your output after signing in with incorrect credentials')
         return value_to_return
 
 
@@ -107,7 +107,7 @@ files:
         are_all_inputs_read = True
         if 'wrong' not in output.lower():
             return CheckResult.wrong(
-                'There is no \'wrong\' in your output after signing in with correct credentials')
+                'There is no \'wrong\' in your output after signing in with incorrect credentials')
         return value_to_return
 
 
@@ -264,6 +264,13 @@ files:
     if __name__ == '__main__':
         BankingSystem('banking.banking').run_tests()
   learner_created: false
+- name: card.s3db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/109/stages/593/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/109/stages/593/implement">JetBrains
+    Academy</a>
+  time: Sat, 01 Aug 2020 13:27:25 UTC
 record: -1

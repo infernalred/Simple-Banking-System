@@ -90,7 +90,7 @@ files:
         are_all_inputs_read = True
         if 'wrong' not in output.lower():
             return CheckResult.wrong(
-                'There is no \'wrong\' in your output after signing in with correct credentials')
+                'There is no \'wrong\' in your output after signing in with incorrect credentials')
         return value_to_return
 
 
@@ -110,7 +110,7 @@ files:
         are_all_inputs_read = True
         if 'wrong' not in output.lower():
             return CheckResult.wrong(
-                'There is no \'wrong\' in your output after signing in with correct credentials')
+                'There is no \'wrong\' in your output after signing in with incorrect credentials')
         return value_to_return
 
 

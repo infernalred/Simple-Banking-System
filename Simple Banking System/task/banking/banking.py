@@ -1,4 +1,25 @@
 from random import randint
+import sqlite3
+
+
+class DataWork:
+    CONN = sqlite3.connect('card.s3db')
+    CURSOR = CONN.cursor()
+
+    def save_change(self):
+        pass
+
+    def create_base(self):
+        self.CURSOR.executescript("""CREATE TABLE IF NOT EXISTS card
+                          (id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, pin TEXT,
+                           balance INTEGER DEFAULT 0)
+                       """)
+        self.CONN.commit()
+
+    def save_card(self, card):
+        params = (card.number, card.pin, card.balance)
+        self.CURSOR.execute("INSERT INTO card VALUES (NULL, ?, ?, ?)", params)
+        self.CONN.commit()
 
 
 class Card:
@@ -13,6 +34,7 @@ class Bank:
         self.list_menu = {1: "Create an account", 2: "Log into account", 0: "Exit"}
         self.account_menu = {1: "Balance", 2: "Log out", 0: "Exit"}
         self.list_accounts = {}
+        self.dt = DataWork()
 
     def menu(self):
         for k, v in self.list_menu.items():
@@ -60,6 +82,7 @@ class Bank:
         return None
 
     def run(self):
+        self.dt.create_base()
         while True:
             self.menu()
             choose = input()
@@ -71,6 +94,7 @@ class Bank:
                 print("Your card PIN:")
                 print(card.pin)
                 self.list_accounts[card.number] = card
+                self.dt.save_card(card)
                 print()
             elif choose == "2":
                 card = self.login()
@@ -96,6 +120,8 @@ class Bank:
                 print("Bye!")
                 quit()
 
+
+# dt = DataWork()
 
 b = Bank()
 b.run()
